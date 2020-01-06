@@ -1,5 +1,5 @@
 var express = require("express");
-var path = require("path");
+//var path = require("path"); move to htmlRoutes
 
 var app = express();
 var PORT = process.env.PORT || 8080;
