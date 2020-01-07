@@ -169,7 +169,7 @@
         <div class="modal-dialog modal-dialog-centered" role="document">
             <div class="modal-content text-center">
                 <div class="modal-header">
-                    <h5 class="modal-title text-center" id="exampleModalLongTitle">We found you a New Friend!</h5>
+                    <h5 class="modal-title text-center" id="exampleModalLongTitle">We matched you as a Friend!</h5>
                 </div>
                 <div class="modal-body" id="modal-body">
                     <h2 id="new-friend"></h2>
@@ -184,24 +184,26 @@
 
 
     <script type="text/javascript">
-        $(".submit").on("click", function (event) {
+        $("#submit").on("click", function (event) {
             event.preventDefault();
 
             var newFriend = {
                 name: $("#name").val().trim(),
                 photo: $("#photo").val().trim(),
-                score: [$("#q1").val(), $("#q2").val(), $("#q3").val(), $("#q4").val(), $("#q5"), $("#q6").val(), $("#q7").val(), $("#q8").val(), $("#q9").val(), $("#q10").val()]
+                scores: [$("#q1").val(), $("#q2").val(), $("#q3").val(), $("#q4").val(), $("#q5").val(), $("#q6").val(), $("#q7").val(), $("#q8").val(), $("#q9").val(), $("#q10").val()]
             };
 
             console.log(newFriend);
 
             $.post("/api/friends", newFriend,
-                function (data) {
+              function (data) {
+                  console.log(data);
                     $("#new-friend").text(data.name);
                     $("#new-friend-photo").attr("src", data.photo);
+                    $("#resultModal").modal("toggle")
                 })
-                
-            $("#resultModal").modal("toggle")
+            
+
         })
 
 

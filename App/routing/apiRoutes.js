@@ -5,19 +5,16 @@ module.exports = function (app) {
         return res.json(friends);
     });
 
-    //app.get("/api/latest",function(req,res){
-    // return res.json(friend[friends.length - 1]);
-    //});
-
     app.post("/api/friends", function (req, res) {
+        //console.log("this post route was hit")
         var survey = req.body;
         var scoresArray = [];
+        console.log(survey);
 
         for (var i = 0; i < friends.length; i++) {
             var scoreDifference = 0;
-
-            for (var j = 0; j < URLSearchParams.scores.length; j++) {
-                scoreDifference += (Math.abs(friends[i].scores[j] - URLSearchParams.scores[j]));
+            for (var j = 0; j < survey.scores.length; j++) {
+                scoreDifference += (Math.abs(friends[i].scores[j] - survey.scores[j]));
             }
 
             scoresArray.push(scoreDifference);
@@ -30,10 +27,10 @@ module.exports = function (app) {
                 bestMatch = i;
             }
         }
+        friends.push(survey);
         var bestFriendMatch = friends[bestMatch];
         res.json(bestFriendMatch);
 
-        friends.push(user);
 
     });
 }
